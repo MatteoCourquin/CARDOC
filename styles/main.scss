@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './abstracts/variables';
+@import './abstracts/functions';
+
+@import './base/reset';
+@import './base/txt';
+
+@import './components/buttons';
+@import './components/form';

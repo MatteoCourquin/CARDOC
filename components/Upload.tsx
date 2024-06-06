@@ -18,6 +18,7 @@ const Upload = ({
   setIsOpen: (value: boolean) => void;
 }) => {
   const createVehicle = useCreateVehicle();
+  // const [image, setImage] = useState<File | null>(null);
   const [vehicleData, setVehicleData] = useState({
     vehicle_name: '',
     type: VEHICLE_TYPE.NA,
@@ -42,8 +43,11 @@ const Upload = ({
   const handleSubmit = (e: any) => {
     e.preventDefault();
     createVehicle.mutate(vehicleData);
-    console.log(vehicleData);
   };
+
+  // const handleImageChange = (e: any) => {
+  //   setImage(e.target.files[0]);
+  // };
 
   const getBrands = () => {
     switch (vehicleData.type) {
@@ -253,6 +257,12 @@ const Upload = ({
                 />
               </label>
             </div>
+            {/* <div>
+              <label>
+                Image:
+                <input type="file" name="image" onChange={handleImageChange} />
+              </label>
+            </div> */}
             <button
               type="submit"
               className="w-full rounded-md bg-blue-500 px-4 py-2 font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"

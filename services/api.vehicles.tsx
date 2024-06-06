@@ -112,7 +112,7 @@ export interface Vehicle {
 }
 
 const instance = axios.create({
-  baseURL: 'https://0hfr9uof24.execute-api.eu-west-1.amazonaws.com/Prod/',
+  baseURL: 'https://mbtzlbt906.execute-api.eu-west-1.amazonaws.com/Prod/',
 });
 
 const requestInterceptor = (config: any) => config;
@@ -233,7 +233,7 @@ export const useCreateVehicle = () => {
       console.error('ERROR' + error);
     },
     onSuccess: (succes) => {
-      console.log('SUCCES' + succes);
+      console.log(succes);
     },
   });
 };

@@ -226,7 +226,7 @@ export const IconProfil = ({ isActive }: { isActive: boolean }) => (
   </svg>
 );
 
-export const IconSearch = ({ isActive }: { isActive: boolean }) => (
+export const IconSearch = ({ isActive }: { isActive?: boolean }) => (
   <svg
     width="24"
     height="24"
@@ -240,7 +240,7 @@ export const IconSearch = ({ isActive }: { isActive: boolean }) => (
   >
     <path
       fillRule="evenodd"
-      clip-rule="evenodd"
+      clipRule="evenodd"
       d="M11.6324 3C16.2814 3 20.0499 6.76847 20.0499 11.4175C20.0499 16.0666 16.2814 19.836 11.6324 19.836C6.98331 19.836 3.21484 16.0666 3.21484 11.4175C3.21484 6.76847 6.98331 3 11.6324 3Z"
       strokeWidth="1.5"
       strokeLinecap="round"
@@ -333,6 +333,33 @@ export const IconSteeringWheel = ({ isActive }: { isActive: boolean }) => (
     ></path>
     <path
       d="M21.027 14.4775C16.2443 14.4775 14.2573 16.9942 14.2573 21.6433"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></path>
+  </svg>
+);
+
+export const IconClose = ({ onClick }: { onClick?: () => void }) => (
+  <svg
+    onClick={onClick}
+    className="cursor-pointer"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6 6L18 18"
+      stroke="#000000"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></path>
+    <path
+      d="M18 6L6 18"
+      stroke="#000000"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"

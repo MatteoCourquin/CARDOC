@@ -8,7 +8,7 @@ export const IconArrowFolder = () => {
   );
 };
 
-export const IconCar = ({ isActive }: { isActive: boolean }) => {
+export const IconCar = ({ isActive }: { isActive?: boolean }) => {
   return (
     <svg
       className={clsx(
@@ -129,7 +129,7 @@ export const IconLogout = ({ isActive }: { isActive?: boolean }) => (
   </svg>
 );
 
-export const IconBike = ({ isActive }: { isActive: boolean }) => (
+export const IconBike = ({ isActive }: { isActive?: boolean }) => (
   <svg
     width="25"
     height="24"

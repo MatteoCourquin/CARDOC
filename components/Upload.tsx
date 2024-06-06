@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { IconClose } from './Icons';
+import { IconBike, IconCar, IconClose } from './Icons';
 import { useState } from 'react';
 import {
   VEHICLE_BRAND_BIKE,
@@ -20,15 +20,15 @@ const Upload = ({
   const createVehicle = useCreateVehicle();
   const [vehicleData, setVehicleData] = useState({
     vehicle_name: '',
-    type: '',
-    brand: '',
+    type: VEHICLE_TYPE.NA,
+    brand: VEHICLE_BRAND_CAR.NA,
     model: '',
-    mileage: '',
-    color: '',
-    energy: '',
-    date_of_first_registration: '',
-    date_of_purchase: '',
-    number_of_owner: '',
+    mileage: 0,
+    color: VEHICLE_COLOR.NA,
+    energy: VEHICLE_ENERGY.NA,
+    date_of_first_registration: parseInt(new Date().toISOString()),
+    date_of_purchase: parseInt(new Date().toISOString()),
+    number_of_owner: 0,
   });
 
   const handleChange = (e: any) => {
@@ -72,7 +72,7 @@ const Upload = ({
       <div
         className={clsx(
           isOpen ? 'scale-100' : 'scale-0',
-          'h-11/12 w-11/12 rounded-xl bg-white p-10 transition-transform',
+          'h-[calc(100%-60px)] w-[calc(100%-60px)] rounded-xl bg-white p-10 transition-transform',
         )}
       >
         <div className="flex flex-col justify-between">
@@ -81,33 +81,74 @@ const Upload = ({
             <IconClose onClick={() => setIsOpen(!isOpen)} />
           </div>
           <form onSubmit={handleSubmit}>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Vehicle Name:
                 <input
                   type="text"
                   name="vehicle_name"
                   value={vehicleData.vehicle_name}
                   onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Type:
-                <select name="type" value={vehicleData.type} onChange={handleChange}>
-                  {Object.values(VEHICLE_TYPE).map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
+                <div className="mt-1 flex space-x-4">
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      name="type"
+                      value={VEHICLE_TYPE.CAR}
+                      checked={vehicleData.type === VEHICLE_TYPE.CAR}
+                      onChange={handleChange}
+                      className="hidden"
+                    />
+                    <div
+                      className={clsx(
+                        'flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border transition-colors',
+                        vehicleData.type === VEHICLE_TYPE.CAR
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-200 text-gray-700',
+                      )}
+                    >
+                      <IconCar isActive={vehicleData.type === VEHICLE_TYPE.CAR} />
+                    </div>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      name="type"
+                      value={VEHICLE_TYPE.BIKE}
+                      checked={vehicleData.type === VEHICLE_TYPE.BIKE}
+                      onChange={handleChange}
+                      className="hidden"
+                    />
+                    <div
+                      className={clsx(
+                        'flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border transition-colors',
+                        vehicleData.type === VEHICLE_TYPE.BIKE
+                          ? 'bg-blue-500 text-white'
+                          : 'bg-gray-200 text-gray-700',
+                      )}
+                    >
+                      <IconBike isActive={vehicleData.type === VEHICLE_TYPE.BIKE} />
+                    </div>
+                  </label>
+                </div>
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Brand:
-                <select name="brand" value={vehicleData.brand} onChange={handleChange}>
+                <select
+                  name="brand"
+                  value={vehicleData.brand}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >
                   {getBrands().map((brand) => (
                     <option key={brand} value={brand}>
                       {brand}
@@ -116,33 +157,39 @@ const Upload = ({
                 </select>
               </label>
             </div>
-            <div>
-              <label>
-                Brand:
-                <input type="text" name="brand" value={vehicleData.brand} onChange={handleChange} />
-              </label>
-            </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Model:
-                <input type="text" name="model" value={vehicleData.model} onChange={handleChange} />
+                <input
+                  type="text"
+                  name="model"
+                  value={vehicleData.model}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Mileage:
                 <input
                   type="number"
                   name="mileage"
                   value={vehicleData.mileage}
                   onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Color:
-                <select name="color" value={vehicleData.color} onChange={handleChange}>
+                <select
+                  name="color"
+                  value={vehicleData.color}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >
                   {Object.values(VEHICLE_COLOR).map((color) => (
                     <option key={color} value={color}>
                       {color}
@@ -151,10 +198,15 @@ const Upload = ({
                 </select>
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Energy:
-                <select name="energy" value={vehicleData.energy} onChange={handleChange}>
+                <select
+                  name="energy"
+                  value={vehicleData.energy}
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                >
                   {Object.values(VEHICLE_ENERGY).map((energy) => (
                     <option key={energy} value={energy}>
                       {energy}
@@ -163,40 +215,50 @@ const Upload = ({
                 </select>
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Date of First Registration:
                 <input
                   type="date"
                   name="date_of_first_registration"
-                  value={vehicleData.date_of_first_registration}
+                  value={
+                    new Date(vehicleData.date_of_first_registration).toISOString().split('T')[0]
+                  }
                   onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Date of Purchase:
                 <input
                   type="date"
                   name="date_of_purchase"
-                  value={vehicleData.date_of_purchase}
+                  value={new Date(vehicleData.date_of_purchase).toISOString().split('T')[0]}
                   onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-4">
+              <label className="mb-2 block font-bold text-gray-700">
                 Number of Owners:
                 <input
                   type="number"
                   name="number_of_owner"
                   value={vehicleData.number_of_owner}
                   onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
             </div>
-            <button type="submit">Submit</button>
+            <button
+              type="submit"
+              className="w-full rounded-md bg-blue-500 px-4 py-2 font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            >
+              Submit
+            </button>
           </form>
         </div>
       </div>

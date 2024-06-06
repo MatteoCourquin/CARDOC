@@ -2,11 +2,13 @@ import axios, { AxiosResponse } from 'axios';
 import { useMutation } from 'react-query';
 
 export enum VEHICLE_TYPE {
+  NA = 'Non renseigné',
   CAR = 'Voiture',
   BIKE = 'Moto',
 }
 
 export enum VEHICLE_BRAND_CAR {
+  NA = 'Non renseigné',
   RENAULT = 'Renault',
   PEUGEOT = 'Peugeot',
   CITROEN = 'Citroën',
@@ -49,6 +51,7 @@ export enum VEHICLE_BRAND_CAR {
 }
 
 export enum VEHICLE_BRAND_BIKE {
+  NA = 'Non renseigné',
   YAMAHA = 'Yamaha',
   SUZUKI = 'Suzuki',
   KAWASAKI = 'Kawasaki',
@@ -68,6 +71,7 @@ export enum VEHICLE_BRAND_BIKE {
 }
 
 export enum VEHICLE_COLOR {
+  NA = 'Non renseigné',
   WHITE = 'Blanc',
   BLACK = 'Noir',
   GREY = 'Gris',
@@ -86,6 +90,7 @@ export enum VEHICLE_COLOR {
 }
 
 export enum VEHICLE_ENERGY {
+  NA = 'Non renseigné',
   GASOLINE = 'Essence',
   DIESEL = 'Diesel',
   ELECTRIC = 'Electrique',
@@ -226,6 +231,9 @@ export const useCreateVehicle = () => {
     mutationFn: postVehicle,
     onError: (error) => {
       console.error('ERROR' + error);
+    },
+    onSuccess: (succes) => {
+      console.log('SUCCES' + succes);
     },
   });
 };
